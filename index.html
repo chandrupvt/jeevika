@@ -31,7 +31,6 @@ body{
   align-items:center;
   z-index:10;
   cursor:pointer;
-  transition:1s;
 }
 
 #entry h2{
@@ -54,6 +53,7 @@ body{
   box-shadow:0 20px 60px rgba(0,0,0,0.2);
   display:none;
   animation:fadeIn 1s ease forwards;
+  position:relative; /* IMPORTANT */
 }
 
 @keyframes fadeIn{
@@ -77,10 +77,16 @@ button{
   color:white;
   font-size:1rem;
   transition:0.3s;
+  position:relative;
 }
 
 button:hover{
   transform:scale(1.1);
+}
+
+#noBtn{
+  background:#ccc;
+  color:black;
 }
 
 /* Romantic Full Screen */
@@ -153,7 +159,6 @@ button:hover{
   from{opacity:0.2}
   to{opacity:1}
 }
-
 </style>
 </head>
 <body>
@@ -169,7 +174,7 @@ button:hover{
 <div class="card" id="mainCard">
   <h1>Happy Valentine's Day Jeevika ❤️</h1>
   <p>You are my forever and always 💖</p>
-  <button id="yesBtn" onclick="sayYes()">Yes 💍</button>
+  <button onclick="sayYes()">Yes 💍</button>
   <button id="noBtn">No 😢</button>
 </div>
 
@@ -183,7 +188,7 @@ button:hover{
 <script>
 
 const text = `
-Jeevika… 🤍
+kuttyma… 🤍
 
 From the moment you entered my life,
 everything changed into something magical.
@@ -208,7 +213,7 @@ You are my today.
 You are my tomorrow.
 You are my always.
 
-Forever starts with you,
+Nee ethu di,I Love You as always and forever my everything..❤️
 and forever belongs to us. 💍❤️~Mama
 `;
 
@@ -239,19 +244,21 @@ function typeWriter(){
   typing();
 }
 
-/* Moving No Button */
+/* MOVING NO BUTTON (WORKING 100%) */
 const noBtn = document.getElementById("noBtn");
 
-noBtn.addEventListener("mouseover", moveNo);
-noBtn.addEventListener("click", moveNo);
+noBtn.addEventListener("mouseenter", function() {
+  const card = document.getElementById("mainCard");
+  const maxX = card.clientWidth - noBtn.offsetWidth;
+  const maxY = card.clientHeight - noBtn.offsetHeight;
 
-function moveNo(){
-  const x = Math.random() * (window.innerWidth - 150);
-  const y = Math.random() * (window.innerHeight - 80);
-  noBtn.style.position = "fixed";
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
-}
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
+
+  noBtn.style.position = "absolute";
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+});
 
 function createHearts(){
   for(let i=0;i<50;i++){
