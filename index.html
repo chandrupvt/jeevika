@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day Jeevika ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Poppins',sans-serif;
+  height:100vh;
+  overflow:hidden;
+  background:linear-gradient(135deg,#fbe7f0,#e8f0ff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* Entry Screen */
+#entry{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:10;
+  cursor:pointer;
+  transition:1s;
+}
+
+#entry h2{
+  color:white;
+  font-size:2rem;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.1)}
+  100%{transform:scale(1)}
+}
+
+.card{
+  background:rgba(255,255,255,0.95);
+  padding:50px;
+  border-radius:30px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,0.2);
+  display:none;
+  animation:fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+h1{
+  color:#ff4f8b;
+  font-size:2.2rem;
+  margin-bottom:10px;
+}
+
+button{
+  margin-top:25px;
+  padding:14px 35px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  background:linear-gradient(45deg,#ff4f8b,#ff758c);
+  color:white;
+  font-size:1rem;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+/* Romantic Full Screen */
+#loveScreen{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:url('jeevika.jpg') center/cover no-repeat;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  animation:zoomBg 20s infinite alternate ease-in-out;
+}
+
+@keyframes zoomBg{
+  from{background-size:100%}
+  to{background-size:110%}
+}
+
+.overlay{
+  background:rgba(0,0,0,0.6);
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.bigTitle{
+  font-family:'Dancing Script',cursive;
+  color:#fff;
+  font-size:3.2rem;
+  text-shadow:0 0 25px #ff4f8b;
+  margin-bottom:30px;
+}
+
+#typedText{
+  color:#fff;
+  font-size:1.3rem;
+  max-width:750px;
+  line-height:1.8;
+  min-height:200px;
+}
+
+/* Floating Hearts */
+.heart{
+  position:absolute;
+  color:#ffb6c1;
+  font-size:20px;
+  animation:float 6s linear infinite;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh)}
+  to{transform:translateY(-10vh)}
+}
+
+/* Sparkle Stars */
+.star{
+  position:absolute;
+  color:white;
+  font-size:10px;
+  animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+  from{opacity:0.2}
+  to{opacity:1}
+}
+
+</style>
+</head>
+<body>
+
+<div id="entry" onclick="startLove()">
+  <h2>Tap To Open My Heart ❤️</h2>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="love.mp3" type="audio/mp3">
+</audio>
+
+<div class="card" id="mainCard">
+  <h1>Happy Valentine's Day Jeevika ❤️</h1>
+  <p>You are my forever and always 💖</p>
+  <button id="yesBtn" onclick="sayYes()">Yes 💍</button>
+   <button id="no" onmouseover="moveNo(this)No 😢 </button>
+</div>
+
+<div id="loveScreen">
+  <div class="overlay">
+    <div class="bigTitle">Happy Valentine's Day Jeevika ❤️</div>
+    <div id="typedText"></div>
+  </div>
+</div>
+
+<script>
+
+const text = `
+Jeevika… 🤍
+
+From the moment you entered my life,
+everything changed into something magical.
+
+You are not just my love,
+you are my peace,
+my happiness,
+my safest place,
+my forever home.
+
+Every heartbeat of mine whispers your name.
+
+With you,
+even ordinary days feel extraordinary.
+
+I promise to stand beside you,
+to protect you,
+to cherish you,
+and to love you deeper with every sunrise.
+
+You are my today.
+You are my tomorrow.
+You are my always.
+
+Forever starts with you,
+and forever belongs to us. 💍❤️~Mama
+`;
+
+function startLove(){
+  document.getElementById("entry").style.display="none";
+  document.getElementById("mainCard").style.display="block";
+  document.getElementById("bgMusic").play();
+}
+
+function sayYes(){
+  document.getElementById("mainCard").style.display="none";
+  document.getElementById("loveScreen").style.display="flex";
+  typeWriter();
+  createHearts();
+  createStars();
+}
+
+function typeWriter(){
+  let i = 0;
+  const speed = 40;
+  function typing(){
+    if(i < text.length){
+      document.getElementById("typedText").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    }
+  }
+  typing();
+}
+
+function createHearts(){
+  for(let i=0;i<50;i++){
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=3+Math.random()*4+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),7000);
+  }
+}
+
+function createStars(){
+  for(let i=0;i<30;i++){
+    const star=document.createElement("div");
+    star.className="star";
+    star.innerHTML="✦";
+    star.style.left=Math.random()*100+"vw";
+    star.style.top=Math.random()*100+"vh";
+    document.body.appendChild(star);
+  }
+}
+
+</script>
+
+</body>
+</html>
