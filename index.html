@@ -12,12 +12,12 @@
 
 body{
   font-family:'Poppins',sans-serif;
-  height:100vh;
-  overflow:hidden;
+  min-height:100vh;
   background:linear-gradient(135deg,#fbe7f0,#e8f0ff);
   display:flex;
   justify-content:center;
   align-items:center;
+  overflow-x:hidden;
 }
 
 /* Entry Screen */
@@ -31,11 +31,13 @@ body{
   align-items:center;
   z-index:10;
   cursor:pointer;
+  text-align:center;
+  padding:20px;
 }
 
 #entry h2{
   color:white;
-  font-size:2rem;
+  font-size:1.8rem;
   animation:pulse 1.5s infinite;
 }
 
@@ -46,14 +48,16 @@ body{
 }
 
 .card{
+  width:90%;
+  max-width:400px;
   background:rgba(255,255,255,0.95);
-  padding:50px;
-  border-radius:30px;
+  padding:30px 20px;
+  border-radius:25px;
   text-align:center;
   box-shadow:0 20px 60px rgba(0,0,0,0.2);
   display:none;
   animation:fadeIn 1s ease forwards;
-  position:relative; /* IMPORTANT */
+  position:relative;
 }
 
 @keyframes fadeIn{
@@ -63,13 +67,18 @@ body{
 
 h1{
   color:#ff4f8b;
-  font-size:2.2rem;
+  font-size:1.6rem;
   margin-bottom:10px;
 }
 
+.card p{
+  font-size:0.95rem;
+}
+
 button{
-  margin-top:25px;
-  padding:14px 35px;
+  width:100%;
+  margin-top:15px;
+  padding:12px;
   border:none;
   border-radius:30px;
   cursor:pointer;
@@ -81,7 +90,7 @@ button{
 }
 
 button:hover{
-  transform:scale(1.1);
+  transform:scale(1.05);
 }
 
 #noBtn{
@@ -99,12 +108,6 @@ button:hover{
   justify-content:center;
   align-items:center;
   text-align:center;
-  animation:zoomBg 20s infinite alternate ease-in-out;
-}
-
-@keyframes zoomBg{
-  from{background-size:100%}
-  to{background-size:110%}
 }
 
 .overlay{
@@ -121,17 +124,17 @@ button:hover{
 .bigTitle{
   font-family:'Dancing Script',cursive;
   color:#fff;
-  font-size:3.2rem;
+  font-size:2.2rem;
   text-shadow:0 0 25px #ff4f8b;
-  margin-bottom:30px;
+  margin-bottom:20px;
 }
 
 #typedText{
   color:#fff;
-  font-size:1.3rem;
-  max-width:750px;
-  line-height:1.8;
-  min-height:200px;
+  font-size:1rem;
+  max-width:90%;
+  line-height:1.6;
+  min-height:150px;
 }
 
 /* Floating Hearts */
@@ -158,6 +161,16 @@ button:hover{
 @keyframes twinkle{
   from{opacity:0.2}
   to{opacity:1}
+}
+
+/* EXTRA MOBILE FIX */
+@media (max-width:480px){
+  .bigTitle{
+    font-size:1.8rem;
+  }
+  #typedText{
+    font-size:0.9rem;
+  }
 }
 </style>
 </head>
@@ -188,6 +201,7 @@ button:hover{
 <script>
 
 const text = `
+
 Jeevika… 🤍
 
 From the moment you entered my life,
@@ -234,9 +248,11 @@ function sayYes(){
 function typeWriter(){
   let i = 0;
   const speed = 40;
+  const typed = document.getElementById("typedText");
+  typed.innerHTML = "";
   function typing(){
     if(i < text.length){
-      document.getElementById("typedText").innerHTML += text.charAt(i);
+      typed.innerHTML += text.charAt(i);
       i++;
       setTimeout(typing, speed);
     }
@@ -244,7 +260,6 @@ function typeWriter(){
   typing();
 }
 
-/* MOVING NO BUTTON (WORKING 100%) */
 const noBtn = document.getElementById("noBtn");
 
 noBtn.addEventListener("mouseenter", function() {
@@ -261,7 +276,7 @@ noBtn.addEventListener("mouseenter", function() {
 });
 
 function createHearts(){
-  for(let i=0;i<50;i++){
+  for(let i=0;i<30;i++){
     const heart=document.createElement("div");
     heart.className="heart";
     heart.innerHTML="❤";
@@ -273,7 +288,7 @@ function createHearts(){
 }
 
 function createStars(){
-  for(let i=0;i<30;i++){
+  for(let i=0;i<20;i++){
     const star=document.createElement("div");
     star.className="star";
     star.innerHTML="✦";
